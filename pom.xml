@@ -115,6 +115,8 @@
         </execution>
         <execution>
           <id>default-check</id>
+          <!--Check in fase di verify per permettere a coveralls di leggere il report prima di un eventuale fail del check-->
+          <phase>verify</phase>
           <goals>
             <goal>check</goal>
           </goals>
@@ -139,6 +141,16 @@
     <groupId>org.eluder.coveralls</groupId>
     <artifactId>coveralls-maven-plugin</artifactId>
     <version>4.3.0</version>
+    <executions>
+          <!-- Coveralls in fase package per pubblicare report anche in caso di fail sul check di jacoco -->
+          <execution>
+            <id>send-to-coveralls</id>
+            <phase>package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
     <configuration>
         <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
         <jacocoReports>
