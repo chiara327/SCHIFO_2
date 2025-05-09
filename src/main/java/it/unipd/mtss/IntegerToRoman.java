@@ -9,7 +9,7 @@ public class IntegerToRoman {
     public static String convert (int number){
 
         if (number < 1 || number > 3) {
-            throw new IllegalArgumentException(number + "non è un numero valido. Il numero deve essere compreso fra 1 e 3.");
+            throw new IllegalArgumentException(number + "non è accettato");
         }
 
         String[] romanLetters = {"I"};
