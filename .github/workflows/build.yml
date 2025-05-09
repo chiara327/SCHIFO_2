@@ -25,9 +25,10 @@ jobs:
       run: mvn site
     
     - name: Report coveralls
+      run: mvn coveralls:report
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      run: mvn coveralls:report
+
     
     - name: Ensure index.html exists
       run: |
