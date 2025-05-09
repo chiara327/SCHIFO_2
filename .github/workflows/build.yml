@@ -19,31 +19,24 @@ jobs:
     
     - name: Build with Maven
       run: | 
-        mvn -B package --file pom.xml || echo "BUILD FAILED" > build_failed.flag 
+        mvn -B package --file pom.xml 
 
     - name: Create site
-      if: always()
       run: mvn site
-
+    
+    - name: Setup variabile per coveralls
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    
     - name: Ensure index.html exists
-      if: always()
       run: |
         if [ ! -f target/site/index.html ]; then
           echo "<html><body><h1>Report Index</h1></body></html>" > target/site/index.html
         fi
 
     - name: Deploy report to GitHub Pages
-      if: always()
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./target/site
 
-    - name: Fail job if build failed
-    #Qui infatti, si controlla se è stata generata la flag di fail. Se si restituisce l'esito "Build failed", altrimenti siamo arrivati alla fine grazie ai vari if always()
-      if: always()
-      run: |
-        if [-f build_failed.flag]; then 
-          echo "Build failed"
-          exit 1
-        fi
