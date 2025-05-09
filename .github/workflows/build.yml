@@ -24,9 +24,10 @@ jobs:
     - name: Create site
       run: mvn site
     
-    - name: Setup variabile per coveralls
+    - name: Report coveralls
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      run: mvn coveralls:report
     
     - name: Ensure index.html exists
       run: |
