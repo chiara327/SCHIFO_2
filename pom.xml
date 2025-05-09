@@ -115,8 +115,6 @@
         </execution>
         <execution>
           <id>default-check</id>
-          <!--Check in fase di verify per permettere a coveralls di leggere il report prima di un eventuale fail del check-->
-          <phase>verify</phase>
           <goals>
             <goal>check</goal>
           </goals>
