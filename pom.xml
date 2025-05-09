@@ -145,7 +145,6 @@
           <!-- Coveralls in fase package per pubblicare report anche in caso di fail sul check di jacoco -->
           <execution>
             <id>send-to-coveralls</id>
-            <phase>package</phase>
             <goals>
               <goal>report</goal>
             </goals>
